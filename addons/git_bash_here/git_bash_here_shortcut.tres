@@ -2,8 +2,8 @@
 
 [sub_resource type="InputEventKey" id="InputEventKey_0afx3"]
 device = -1
-alt_pressed = true
 shift_pressed = true
+ctrl_pressed = true
 keycode = 71
 
 [resource]
