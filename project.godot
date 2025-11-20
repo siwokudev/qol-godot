@@ -16,7 +16,7 @@ config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/git_bash_here/plugin.cfg")
+enabled=PackedStringArray("res://addons/plugin-enable-dock/plugin.cfg")
 
 [rendering]
 
