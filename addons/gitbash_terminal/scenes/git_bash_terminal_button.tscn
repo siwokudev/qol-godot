@@ -43,7 +43,7 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "current branch: master
+placeholder_text = "On branch master
 "
 keep_editing_on_text_submit = true
 caret_blink = true

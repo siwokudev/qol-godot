@@ -38,6 +38,8 @@ func _ready() -> void:
 	terminal_line_edit.caret_blink = true
 	terminal_line_edit.keep_editing_on_text_submit = true
 	rich_text_label.scroll_following = true
+	rich_text_label.selection_enabled = true
+	rich_text_label.context_menu_enabled = true
 	
 	terminal_line_edit.placeholder_text = get_current_branch()
 
@@ -51,7 +53,7 @@ func execute_command(command : String) -> void:
 	var output = execute(command)
 	
 	for message in output:
-		rich_text_label.text += preetify_output_text(message)
+		rich_text_label.text += prettify_output_text(message)
 	rich_text_label.text += "\n\n "
 
 func execute(command : String) -> Array:
@@ -69,15 +71,18 @@ func get_current_branch() -> String:
 		return "On branch " + output[0]
 	return "gir project not extarted: use 'git init' or 'init' "
 
-func preetify_output_text(text : String) -> String:
+func prettify_output_text(text : String) -> String:
 	text = replace(text, "(?m)^error .*$", colors.danger)
 	text = replace(text, "(?m)^On branch.*$", colors.current_branch, true)
 	text = replace(text, "(?m)^\tdeleted:", colors.danger)
 	text = replace(text, "(?m)^\tmodified:", colors.warning)
+	text = replace(text, "(?m)^\tnew file:", colors.good)
 	text = replace(text, "(?m)^added for commit:", colors.danger)
 	text = replace(text, "(?m)^Changes to be committed:", colors.warning)
 	text = replace(text, "(?m)^Changes not staged for commit:", colors.danger)
 	text = replace(text, "(?m)^commit [0-9A-Za-z]+$", colors.warning)
+	text = replace(text, "(?m)^error .*$", colors.danger)
+	text = replace(text, "(?m)^Untracked files:", colors.danger)
 	text = replace(text, "(?m)^-(?!-)(.*)$", colors.danger)
 	text = replace(text, "(?m)^\\+(?!\\+)(.*)$", colors.good)
 	text = replace(text, "(?m)^diff.*$", colors.diff_file, true, 1, 1)
