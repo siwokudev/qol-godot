@@ -2,9 +2,11 @@
 extends HBoxContainer
 
 @onready var v_box_container: VBoxContainer = %VBoxContainer
+@onready var button_reload_project: Button = %ButtonReloadProject
 
 func _ready() -> void:
 	add_plugin_control()
+	button_reload_project.pressed.connect(on_button_reload_project_pressed)
 	
 func add_plugin_control() -> void:
 	var plugins := get_all_plugins()
@@ -27,19 +29,6 @@ func add_plugin_control() -> void:
 		boxContainer.add_child(name_label)
 		
 		v_box_container.add_child(boxContainer)
-
-func _on_reload_button_pressed(_name : String) -> void:
-	if !is_plugin_enabled(_name):
-		return
-	disable_plugin(_name)
-	await get_tree().create_timer(0.1).timeout
-	enable_plugin(_name)
-
-func _on_toggled_checkbutton(toggled_on: bool, plugin : String) -> void:
-	if toggled_on:
-		enable_plugin(plugin)
-	else:
-		disable_plugin(plugin)
 
 func is_plugin_enabled(_name : String) -> bool:
 	if (_name.length() != 0):
@@ -68,3 +57,19 @@ func get_all_plugins() -> Array:
 			folder = dir.get_next()
 		dir.list_dir_end()
 	return plugins
+
+func _on_reload_button_pressed(_name : String) -> void:
+	if !is_plugin_enabled(_name):
+		return
+	disable_plugin(_name)
+	await get_tree().create_timer(0.1).timeout
+	enable_plugin(_name)
+
+func _on_toggled_checkbutton(toggled_on: bool, plugin : String) -> void:
+	if toggled_on:
+		enable_plugin(plugin)
+	else:
+		disable_plugin(plugin)
+
+func on_button_reload_project_pressed() -> void:
+	EditorInterface.restart_editor(true)

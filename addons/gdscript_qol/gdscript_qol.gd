@@ -1,10 +1,10 @@
 @tool
 extends EditorPlugin
 
-const PLUGIN_NAME = "gdscript_qol"
+const signal_function_auto_complete_path := "gdscript_qol/signal_function_auto_complete"
 
-func _enable_plugin():
-	EditorInterface.set_plugin_enabled(PLUGIN_NAME + "/void_function_autocomplete", true)
+func _enable_plugin() -> void:
+	EditorInterface.set_plugin_enabled(signal_function_auto_complete_path, true)
 
-func _disable_plugin():
-	EditorInterface.set_plugin_enabled(PLUGIN_NAME + "/void_function_autocomplete", false)
+func _disable_plugin() -> void:
+	EditorInterface.set_plugin_enabled(signal_function_auto_complete_path, false)

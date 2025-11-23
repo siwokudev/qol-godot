@@ -14,3 +14,12 @@ script = ExtResource("1_c8b3j")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ButtonReloadProject" type="Button" parent="VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reload current project"
