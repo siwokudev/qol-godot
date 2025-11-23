@@ -1,4 +1,4 @@
 extends Node
 
 func _ready() -> void:
-	pass
+	tree_entered.connect(func() -> void: print("site"))

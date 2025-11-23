@@ -32,11 +32,18 @@ func _on_caret_changed() -> void:
 	void_func_completition()
 
 func void_func_completition() -> void:
-	var caret_current_line := code_edit.get_caret_line()
-	var current_line := code_edit.get_line(caret_current_line)
-	if current_line.contains("func") && current_line.contains("():"):
-		current_line = current_line.replacen("():", "() -> void:")
-		code_edit.set_line(caret_current_line, current_line)
-		code_edit.set_caret_line(caret_current_line)
-		code_edit.set_caret_column(999)
-		code_edit.set_caret_column(current_line.length())
+	var line := code_edit.get_caret_line()
+	var text := code_edit.get_line(line)
+	var void_func_text_index := text.find("():")
+	
+	var regex := RegEx.new()
+	regex.compile("(?<![A-Za-z_])func(?![A-Za-z_])")
+	var is_function_or_lambda := regex.search(text)
+	
+	if is_function_or_lambda && void_func_text_index != -1:
+		code_edit.start_action(TextEdit.ACTION_DELETE)
+		code_edit.remove_text(line, void_func_text_index,line, void_func_text_index + 3)
+		code_edit.end_action()
+		code_edit.start_action(TextEdit.ACTION_TYPING)
+		code_edit.insert_text("() -> void:", line, void_func_text_index)
+		code_edit.end_action()
