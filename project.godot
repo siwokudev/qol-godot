@@ -16,7 +16,7 @@ config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons//gdscript_qol/signal_function_auto_complete//plugin.cfg", "res://addons/gdscript_qol/plugin.cfg", "res://addons/gdscript_qol/signal_function_auto_complete/plugin.cfg", "res://addons/gitbash_terminal/plugin.cfg", "res://addons/plugin-enable-dock/plugin.cfg")
+enabled=PackedStringArray("res://addons//gdscript_qol/signal_function_auto_complete//plugin.cfg", "res://addons/gdscript_qol/function_generator/plugin.cfg", "res://addons/gdscript_qol/plugin.cfg", "res://addons/gdscript_qol/signal_function_auto_complete/plugin.cfg", "res://addons/gitbash_terminal/plugin.cfg", "res://addons/plugin-enable-dock/plugin.cfg")
 
 [rendering]
 
